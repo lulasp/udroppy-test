@@ -4,6 +4,11 @@ import { Button } from 'react-bootstrap';
 import Option from './Option';
 
 export default class Options extends Component {
+
+    //handleClick
+    addOptionComponent() {
+        console.log('Click happened');
+    }
     render() {
         return (
             <Accordion defaultActiveKey="0">
@@ -11,7 +16,7 @@ export default class Options extends Component {
                     <Card.Header className="d-flex justify-content-between">
                         <span>Options</span>
                         <div>
-                            <Button variant="secondary">+</Button>
+                            <Button onClick={() => this.addOptionComponent()} variant="secondary">+</Button>
                             <Accordion.Toggle as={Button} variant="link" eventKey="0">
                                 <Button variant="info">UP</Button>
                             </Accordion.Toggle>

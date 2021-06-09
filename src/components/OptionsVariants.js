@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Accordion, Card } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import Options from './Options';
+import Variants from './Variants';
 
 export default class OptionsVariants extends Component {
     render() {
@@ -16,6 +17,7 @@ export default class OptionsVariants extends Component {
                     <Accordion.Collapse eventKey="0">
                         <Card.Body>
                             <Options />
+                            <Variants />
                         </Card.Body>
                     </Accordion.Collapse>
                 </Card>
