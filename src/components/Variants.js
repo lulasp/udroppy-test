@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Accordion, Card, Col, Row, Table } from 'react-bootstrap';
+import { Accordion, Card, Table } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 
 
