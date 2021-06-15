@@ -10,9 +10,9 @@ export default class Option extends Component {
             optionValues: [],
         };
         this.handleOptionValueField = this.handleOptionValueField.bind(this);
-        this.handleOptionValueChange = this.handleOptionValueChange.bind(this);
+        this.removeOptionValueField = this.removeOptionValueField.bind(this);
     }
-    //handleClick show component, increase count. 
+    //handleClick, increase count. 
     handleOptionValueField() {
         console.log('add value field');
         let optionValues = this.state.optionValues;
@@ -24,10 +24,8 @@ export default class Option extends Component {
                         type="text"
                         className="optionValue"
                         style={{ width: "70%" }}
-                        value={count}
-                        onChange={this.handleOptionValueChange}
                     />
-                    <Button variant="warning">-</Button>
+                    <Button variant="warning" onClick={() => this.removeOptionValueField()}>-</Button>
                 </Col>
             )
             this.setState({
@@ -37,7 +35,12 @@ export default class Option extends Component {
         }
     }
 
-    handleOptionValueChange(event){
+    //remove option field
+    removeOptionValueField() {
+        console.log('remove button clicked');
+    }
+
+    handleOptionValuechange(){
         console.log('value has changed');
     }
     render() {
