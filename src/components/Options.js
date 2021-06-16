@@ -6,9 +6,10 @@ import Option from './Option';
 
 class Options extends Component {
         //@TODO:Create handleClick
-        // handleClick = () => {
-        //   this.props.addOption(this.props.option.id);
-        // }
+        handleClick = () => {
+         // this.props.addOption(this.props.option.id);
+         console.log('this was clicked');
+        }
 render(){
   //console.log(this.props)
         const { options } = this.props;
@@ -30,7 +31,7 @@ render(){
                     <Card.Header className="d-flex justify-content-between">
                         <span>Options</span>
                         <div>
-                            <Button variant="secondary">This+</Button>
+                            <Button variant="secondary" onClick={this.handleClick}>This+</Button>
                             <Accordion.Toggle as={Button} variant="link" eventKey="0">
                                 <Button variant="info">UP</Button>
                             </Accordion.Toggle>

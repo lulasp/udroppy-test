@@ -45,19 +45,24 @@ class Option extends Component {
     //     console.log('value has changed');
     // }
     render() {
-        console.log(this.props);
-
-        console.log(this.props.option.value)
+        //console.log(this.props);
+        const optionValue = this.props.option.value;
+        console.log(optionValue)
         const option = this.props.option ? (
-                <Col>
+            optionValue.map(value => {
+                return (
+                    <Col>
                     <input
                         type="text"
                         className="optionValue"
-                        value={this.props.option.value}
+                        value={value}
                         style={{ width: "70%" }}
                     />
                     <Button variant="warning" onClick={() => this.removeOptionValueField()}>-</Button>
                 </Col>
+                )
+              })
+
           ) : (
             <div className="center">Add an option</div>
           );

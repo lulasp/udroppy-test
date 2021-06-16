@@ -1,7 +1,7 @@
 const initState = {
     options: [
         { id: 1, content: 'Option 0', value: ['test', 'test3'] },
-        { id: 2, content: 'Option 1', value: 'test2' },
+        { id: 2, content: 'Option 1', value: ['test2'] },
     ]
 }
 
