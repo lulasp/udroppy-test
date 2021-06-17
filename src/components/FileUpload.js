@@ -18,7 +18,7 @@ function FileUpload() {
                 <p>Drag and drop a file here or click</p>
             </div>
             <aside>
-                <h4>Files</h4>
+                <p>Filename:</p>
                 <ul>{files}</ul>
             </aside>
         </section>

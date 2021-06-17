@@ -60,7 +60,7 @@ export default class Variants extends Component {
                                                     <InputGroup.Text><FaDollarSign /></InputGroup.Text>
                                                 </InputGroup.Prepend>
                                                 <FormControl
-                                                    placeholder="Insert a price o"
+                                                    placeholder="Insert a price"
                                                     aria-label="Amount (to the nearest dollar)"
                                                 />
                                             </InputGroup>

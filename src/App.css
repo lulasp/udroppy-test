@@ -20,11 +20,14 @@
 }
 
 .fileUpload {
-  border: gray 1px;
-  border-style: solid;
+  border: 1px solid #8c8c8c;
+  color: #8c8c8c;
 }
 
-.uploadIcon {}
+.dropzone {
+  margin-top: 35px;
+  margin-bottom: 25px;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
