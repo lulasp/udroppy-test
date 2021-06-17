@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Accordion, Card, Table, InputGroup, FormControl, Form } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { FaBarcode, FaWeightHanging, FaDollarSign, FaTimes, FaPlus, FaArrowUp } from 'react-icons/fa'
+import FileUpload from './FileUpload';
 
 
 export default class Variants extends Component {
@@ -46,7 +47,7 @@ export default class Variants extends Component {
                                                 />
                                             </InputGroup>
                                         </td>
-                                        <td>IMAGE FIELD GOING HERE</td>
+                                        <td><FileUpload /></td>
                                         <td>
                                             <Form.Control as="select" defaultValue="----">
                                                 <option>-----</option>

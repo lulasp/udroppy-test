@@ -19,6 +19,13 @@
   font-weight: bold;
 }
 
+.fileUpload {
+  border: gray 1px;
+  border-style: solid;
+}
+
+.uploadIcon {}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
