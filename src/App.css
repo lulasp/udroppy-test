@@ -7,6 +7,18 @@
   margin-top: 5%;
 }
 
+.optionRemove {
+  margin-left: 20px;
+}
+
+.optionUp {
+  padding-left: 5px !important;
+}
+
+.cardTitle {
+  font-weight: bold;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

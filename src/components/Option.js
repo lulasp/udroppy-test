@@ -2,48 +2,9 @@ import React, { Component } from 'react';
 import { Accordion, Card, Col, Row } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux'
+import { FaPlus, FaArrowUp, FaTimes, FaMinus } from 'react-icons/fa'
 
 class Option extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         count: 0,
-    //         optionValues: [],
-    //     };
-    //     this.handleOptionValueField = this.handleOptionValueField.bind(this);
-    //     this.removeOptionValueField = this.removeOptionValueField.bind(this);
-    // }
-    // //handleClick, increase count. 
-    // handleOptionValueField() {
-    //     console.log('add value field');
-    //     let optionValues = this.state.optionValues;
-    //     let count = "Value " + this.state.count;
-    //     if (optionValues.length <= 2) {
-    //         optionValues.push(
-    //             <Col>
-    //                 <input
-    //                     type="text"
-    //                     className="optionValue"
-    //                     style={{ width: "70%" }}
-    //                 />
-    //                 <Button variant="warning" onClick={() => this.removeOptionValueField()}>-</Button>
-    //             </Col>
-    //         )
-    //         this.setState({
-    //             count: this.state.count + 1,
-    //             optionValues: optionValues,
-    //         });
-    //     }
-    // }
-
-    // //remove option field
-    // removeOptionValueField() {
-    //     console.log('remove button clicked');
-    // }
-
-    // handleOptionValuechange(){
-    //     console.log('value has changed');
-    // }
     render() {
         //console.log(this.props);
         const optionValue = this.props.option.value;
@@ -58,7 +19,7 @@ class Option extends Component {
                         value={value}
                         style={{ width: "70%" }}
                     />
-                    <Button variant="warning" onClick={() => this.removeOptionValueField()}>-</Button>
+                    <Button variant="warning" onClick={() => this.removeOptionValueField()}><FaMinus /></Button>
                 </Col>
                 )
               })
@@ -80,9 +41,9 @@ class Option extends Component {
                                     value={this.props.option.content}
                                     style={{ width: "50%" }}
                                 />
-                                <Button variant="warning">X</Button>
-                                <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                                    <Button variant="info">UP</Button>
+                                <Button variant="warning" className="optionRemove"><FaTimes /></Button>
+                                <Accordion.Toggle as={Button} variant="link" eventKey="0" className="optionUp">
+                                    <Button variant="info"><FaArrowUp /></Button>
                                 </Accordion.Toggle>
                             </Col>
                         </Row>
@@ -96,7 +57,7 @@ class Option extends Component {
                         </Card.Body>
                     </Accordion.Collapse>
                     <Card.Footer className="d-flex justify-content-end">
-                        <Button variant="secondary" onClick={() => this.handleOptionValueField()}>OTHER +</Button>
+                        <Button variant="secondary" onClick={() => this.handleOptionValueField()}><FaPlus /></Button>
                     </Card.Footer>
                 </Card>
             </Accordion>
@@ -104,4 +65,10 @@ class Option extends Component {
     }
 }
 
-export default Option
+const mapStateToProps = (state) => {
+    return {
+      options: state.options
+    }
+  }
+
+export default connect(mapStateToProps)(Option)
