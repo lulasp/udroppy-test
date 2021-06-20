@@ -1,17 +1,11 @@
-import React, { Component } from 'react';
-import { Accordion, Card, Table, InputGroup, FormControl, Form, Button } from 'react-bootstrap';
-import { FaBarcode, FaWeightHanging, FaDollarSign, FaTimes, FaPlus, FaArrowUp } from 'react-icons/fa'
-import FileUpload from './FileUpload';
+import React from 'react';
+import { Accordion, Card, Table, Button } from 'react-bootstrap';
+import { FaPlus, FaArrowUp } from 'react-icons/fa'
+import generateUUID from './GenerateUUID';
 import Variant from './Variant';
 import { connect } from 'react-redux';
 
 const Variants = ({ variants = [], addVariant }) => {
-    const generateUUID = () => {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-            return v.toString(16);
-        });
-    }
 
     const handleClick = () => {
         addVariant(generateUUID());

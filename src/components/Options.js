@@ -1,21 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Accordion, Card, Col, Row, Button } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import Option from './Option';
-import { addOption } from '../actions/optionActions';
+import generateUUID from './GenerateUUID';
 import { FaPlus, FaArrowUp } from 'react-icons/fa'
 
 
 const Options = ({ options = [], addOption }) => {
-  const generateUUID = () => {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
-  }
 
   const handleClick = () => {
-    console.log('handle click')
     addOption(generateUUID());
   }
   return (
@@ -39,7 +32,7 @@ const Options = ({ options = [], addOption }) => {
                 options.map((option, i) => {
                   return (
                     <Col>
-                      <Option option={option} id={i} />
+                      <Option option={option} id={i} optionId={option.id} />
                     </Col>
                   );
                 })) : (<div className="center">No options to show</div>)}
@@ -59,7 +52,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    //deletePost: (id) => { dispatch({ type: 'DELETE_POST', id: id }) }
     addOption: (id) => { dispatch({ type: 'ADD_OPTION', value: { id: id } }) },
   }
 }

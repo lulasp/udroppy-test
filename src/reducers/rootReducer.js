@@ -6,13 +6,6 @@ const initState = {
 }
 
 const rootReducer = (state = initState, action) => {
-    // if (action.type === 'ADD_OPTION') {
-    //     return {
-    //         ...state,
-    //         options: [...state.options, action.options],
-    //     }
-    // }
-
     if (action.type === 'ADD_VARIANT') {
         const newVariant = {
             ...state,
@@ -62,6 +55,38 @@ const rootReducer = (state = initState, action) => {
             ]
         };
         return newOption;
+    };
+
+    if (action.type === 'UPDATE_OPTION') {
+        const options = state.options.map(option => {
+            console.log('action value id ', action.value)
+            console.log('option id ', option.id)
+            if (option.id === action.value.id) {
+                console.log('here ', action.value)
+                return action.value;
+            };
+            return option;
+        });
+        return {
+            ...state,
+            options
+        }
+
+    };
+
+    if (action.type === 'REMOVE_OPTION') {
+        const optionIndexToChange = state.options.findIndex((option) => {
+            console.log('option', option)
+            return option.id === action.value
+        });
+
+        return {
+            ...state,
+            options: [
+                ...state.options.slice(0, optionIndexToChange),
+                ...state.options.slice(optionIndexToChange + 1)
+            ],
+        }
     };
 
     return state;

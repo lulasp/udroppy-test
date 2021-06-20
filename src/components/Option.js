@@ -1,11 +1,12 @@
-import React, { createRef, useState } from 'react';
+import React, { createRef } from 'react';
 import { Accordion, Card, Col, Row, Button } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import { FaPlus, FaArrowUp, FaTimes, FaMinus } from 'react-icons/fa'
 
-const Option = ({ options, id }) => {
+const Option = ({ options, option, addOptionValue, updateOption, removeOption, id, optionId }) => {
     const titleRef = createRef(`Option - ${id}`);
     const valuesRefs = [];
+    const optionValues = [];
 
     const handleKeyUp = () => {
         const valuesToSend = {
@@ -14,15 +15,17 @@ const Option = ({ options, id }) => {
             values: [],
         };
 
-        console.log('valuesRef', valuesRefs);
-        // updateVariant(valuesToSend);
+        updateOption(valuesToSend);
     }
 
 
     const setRef = (ref) => {
-        console.log(valuesRefs);
         valuesRefs.push(ref);
     };
+
+    const handleRemoveOption = () => {
+        removeOption(optionId);
+    }
 
     return (
         <Accordion defaultActiveKey="0" onKeyUp={handleKeyUp}>
@@ -37,7 +40,7 @@ const Option = ({ options, id }) => {
                                 defaultValue={`Option ${id}`}
                                 style={{ width: "50%" }}
                             />
-                            <Button variant="warning" className="optionRemove"><FaTimes /></Button>
+                            <Button variant="warning" className="optionRemove" onClick={handleRemoveOption}><FaTimes /></Button>
                             <Accordion.Toggle as={Button} variant="link" eventKey="0" className="optionUp">
                                 <Button variant="info"><FaArrowUp /></Button>
                             </Accordion.Toggle>
@@ -48,8 +51,8 @@ const Option = ({ options, id }) => {
                     <Card.Body>
                         <Card.Title></Card.Title>
                         <Card.Text>
-                            {options.length ? (
-                                options.map((option, i) => {
+                            {optionValues.length ? (
+                                optionValues.map((option, i) => {
                                     return (
                                         <Col>
                                             <input
@@ -84,7 +87,7 @@ const mapStateToProps = (state) => {
     }
 }
 const mapDispatchToProps = (dispatch) => ({
-    addOption: (value) => { dispatch({ type: 'ADD_OPTION', value: value }) },
+    addOptionValue: (id) => { dispatch({ type: 'ADD_OPTION_VALUE', value: id }) },
     updateOption: (value) => { dispatch({ type: 'UPDATE_OPTION', value: value }) },
     removeOption: (id) => { dispatch({ type: 'REMOVE_OPTION', value: id }) },
 });

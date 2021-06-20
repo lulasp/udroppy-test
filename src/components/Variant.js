@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 
 const Variant = ({ updateVariant, removeVariant, id }) => {
-    const userName = createRef();
+    const productCode = createRef();
     const priceRef = createRef();
     const weightRef = createRef();
     const skuRef = createRef();
@@ -14,7 +14,7 @@ const Variant = ({ updateVariant, removeVariant, id }) => {
     const handleKeyUp = () => {
         const valuesToSend = {
             id: id,
-            userName: userName.current.value,
+            productCode: productCode.current.value,
             price: priceRef.current.value,
             weight: weightRef.current.value,
             sku: skuRef.current.value,
@@ -35,9 +35,9 @@ const Variant = ({ updateVariant, removeVariant, id }) => {
                         <InputGroup.Text id="basic-addon1"><FaBarcode /></InputGroup.Text>
                     </InputGroup.Prepend>
                     <FormControl
-                        ref={userName}
-                        placeholder="Username"
-                        aria-label="Username"
+                        ref={productCode}
+                        placeholder="ProductCode"
+                        aria-label="ProductCode"
                         aria-describedby="basic-addon1"
                     />
                 </InputGroup>
