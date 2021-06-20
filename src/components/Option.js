@@ -1,74 +1,93 @@
-import React, { Component } from 'react';
-import { Accordion, Card, Col, Row } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import React, { createRef, useState } from 'react';
+import { Accordion, Card, Col, Row, Button } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import { FaPlus, FaArrowUp, FaTimes, FaMinus } from 'react-icons/fa'
 
-class Option extends Component {
-    render() {
-        //console.log(this.props);
-        const optionValue = this.props.option.value;
-        console.log(optionValue)
-        const option = this.props.option ? (
-            optionValue.map(value => {
-                return (
-                    <Col>
-                    <input
-                        type="text"
-                        className="optionValue"
-                        value={value}
-                        style={{ width: "70%" }}
-                    />
-                    <Button variant="warning" onClick={() => this.removeOptionValueField()}><FaMinus /></Button>
-                </Col>
-                )
-              })
+const Option = ({ options, id }) => {
+    const titleRef = createRef(`Option - ${id}`);
+    const valuesRefs = [];
 
-          ) : (
-            <div className="center">Add an option</div>
-          );
+    const handleKeyUp = () => {
+        const valuesToSend = {
+            id,
+            title: titleRef.current.value,
+            values: [],
+        };
 
-        //let optionValuesField = this.state.optionValues;
-        return (
-            <Accordion defaultActiveKey="0">
-                <Card style={{ width: '100%' }}>
-                    <Card.Header className="d-flex justify-content-between">
-                        <Row>
-                            <Col>
-                                <input
-                                    type="text"
-                                    className="optionHeading"
-                                    value={this.props.option.content}
-                                    style={{ width: "50%" }}
-                                />
-                                <Button variant="warning" className="optionRemove"><FaTimes /></Button>
-                                <Accordion.Toggle as={Button} variant="link" eventKey="0" className="optionUp">
-                                    <Button variant="info"><FaArrowUp /></Button>
-                                </Accordion.Toggle>
-                            </Col>
-                        </Row>
-                    </Card.Header>
-                    <Accordion.Collapse eventKey="0">
-                        <Card.Body>
-                            <Card.Title></Card.Title>
-                            <Card.Text>
-                                {option}
-                            </Card.Text>
-                        </Card.Body>
-                    </Accordion.Collapse>
-                    <Card.Footer className="d-flex justify-content-end">
-                        <Button variant="secondary" onClick={() => this.handleOptionValueField()}><FaPlus /></Button>
-                    </Card.Footer>
-                </Card>
-            </Accordion>
-        )
+        console.log('valuesRef', valuesRefs);
+        // updateVariant(valuesToSend);
     }
+
+
+    const setRef = (ref) => {
+        console.log(valuesRefs);
+        valuesRefs.push(ref);
+    };
+
+    return (
+        <Accordion defaultActiveKey="0" onKeyUp={handleKeyUp}>
+            <Card style={{ width: '100%' }}>
+                <Card.Header className="d-flex justify-content-between">
+                    <Row>
+                        <Col>
+                            <input
+                                type="text"
+                                className="optionHeading"
+                                ref={titleRef}
+                                defaultValue={`Option ${id}`}
+                                style={{ width: "50%" }}
+                            />
+                            <Button variant="warning" className="optionRemove"><FaTimes /></Button>
+                            <Accordion.Toggle as={Button} variant="link" eventKey="0" className="optionUp">
+                                <Button variant="info"><FaArrowUp /></Button>
+                            </Accordion.Toggle>
+                        </Col>
+                    </Row>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                    <Card.Body>
+                        <Card.Title></Card.Title>
+                        <Card.Text>
+                            {options.length ? (
+                                options.map((option, i) => {
+                                    return (
+                                        <Col>
+                                            <input
+                                                type="text"
+                                                className="optionValue"
+                                                ref={setRef}
+                                                defaultValue={`Value ${i}`}
+                                                style={{ width: "70%" }}
+                                            />
+                                            <Button variant="warning"><FaMinus /></Button>
+                                        </Col>
+                                    )
+                                })
+
+                            ) : (
+                                <div className="center">Add an option</div>
+                            )}
+                        </Card.Text>
+                    </Card.Body>
+                </Accordion.Collapse>
+                <Card.Footer className="d-flex justify-content-end">
+                    <Button variant="secondary"><FaPlus /></Button>
+                </Card.Footer>
+            </Card>
+        </Accordion>
+    )
 }
 
 const mapStateToProps = (state) => {
     return {
-      options: state.options
+        options: state.options
     }
-  }
+}
+const mapDispatchToProps = (dispatch) => ({
+    addOption: (value) => { dispatch({ type: 'ADD_OPTION', value: value }) },
+    updateOption: (value) => { dispatch({ type: 'UPDATE_OPTION', value: value }) },
+    removeOption: (id) => { dispatch({ type: 'REMOVE_OPTION', value: id }) },
+});
 
-export default connect(mapStateToProps)(Option)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Option);

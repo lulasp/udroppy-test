@@ -2,14 +2,24 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Container, Row } from 'react-bootstrap';
 import OptionsVariants from './components/OptionsVariants';
+import SaveButtons from './components/SaveButtons';
+import { connect } from 'react-redux';
 
-function App() {
+function App({ variants }) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Submitted', variants);
+  };
+
   return (
     <div className="App">
       <Container>
         <Row>
           <Col>
-            <OptionsVariants />
+            <form onSubmit={handleSubmit}>
+              <OptionsVariants />
+              <SaveButtons />
+            </form>
           </Col>
         </Row>
       </Container>
@@ -17,4 +27,15 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    variants: state.variants
+  }
+}
+const mapDispatchToProps = (dispatch) => ({
+  addVariant: (variantValue) => { dispatch({ type: 'ADD_VARIANT', value: variantValue }) },
+  updateVariant: (variantValue) => { dispatch({ type: 'UPDATE_VARIANT', value: variantValue }) },
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

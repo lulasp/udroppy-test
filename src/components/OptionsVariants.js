@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Accordion, Card } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import { Accordion, Card, Button } from 'react-bootstrap';
 import Options from './Options';
 import Variants from './Variants';
+import SaveButtons from './SaveButtons';
 import { FaArrowUp } from 'react-icons/fa'
 
 export default class OptionsVariants extends Component {
@@ -21,10 +21,6 @@ export default class OptionsVariants extends Component {
                             <Variants />
                         </Card.Body>
                     </Accordion.Collapse>
-                    <Card.Footer className="d-flex justify-content-between">
-                        <Button variant="primary">Hide/Show Variants</Button>
-                        <Button variant="success">Save Product</Button>
-                    </Card.Footer>
                 </Card>
             </Accordion>
         )
