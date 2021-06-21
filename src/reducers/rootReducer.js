@@ -76,9 +76,16 @@ const rootReducer = (state = initState, action) => {
 
     if (action.type === 'REMOVE_OPTION') {
         const optionIndexToChange = state.options.findIndex((option) => {
-            console.log('option', option)
-            return option.id === action.value
+            console.log('option.id ', option.id)
+            console.log('action.value ', action.value)
+            return option.id !== action.value
         });
+
+        // const optionIndexToChange = state.options.filter((option) => {
+        //     console.log('option.id', option.id)
+        //     console.log('action.value', action.value)
+        //     return option.id !== action.value
+        // })
 
         return {
             ...state,
@@ -87,6 +94,17 @@ const rootReducer = (state = initState, action) => {
                 ...state.options.slice(optionIndexToChange + 1)
             ],
         }
+    };
+
+    if (action.type === 'ADD_OPTION_VALUE') {
+        const newOptionValue = {
+            ...state,
+            options: [
+                ...state.options,
+                action.value
+            ]
+        };
+        return newOptionValue;
     };
 
     return state;

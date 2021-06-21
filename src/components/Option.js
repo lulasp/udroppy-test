@@ -27,6 +27,10 @@ const Option = ({ options, option, addOptionValue, updateOption, removeOption, i
         removeOption(optionId);
     }
 
+    const handleAddOptionValue = () => {
+        addOptionValue(optionId);
+    }
+
     return (
         <Accordion defaultActiveKey="0" onKeyUp={handleKeyUp}>
             <Card style={{ width: '100%' }}>
@@ -74,7 +78,7 @@ const Option = ({ options, option, addOptionValue, updateOption, removeOption, i
                     </Card.Body>
                 </Accordion.Collapse>
                 <Card.Footer className="d-flex justify-content-end">
-                    <Button variant="secondary"><FaPlus /></Button>
+                    <Button variant="secondary" onClick={handleAddOptionValue}><FaPlus /></Button>
                 </Card.Footer>
             </Card>
         </Accordion>
