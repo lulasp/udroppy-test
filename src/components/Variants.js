@@ -5,7 +5,7 @@ import generateUUID from './GenerateUUID';
 import Variant from './Variant';
 import { connect } from 'react-redux';
 
-const Variants = ({ variants = [], addVariant }) => {
+const Variants = ({ variants = [], options, addVariant }) => {
 
     const handleClick = () => {
         addVariant(generateUUID());
@@ -25,12 +25,14 @@ const Variants = ({ variants = [], addVariant }) => {
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                     <Card.Body>
-                        <Table hover>
+                        <Table>
                             <thead>
                                 <tr>
                                     <th>Product Code</th>
                                     <th>Image</th>
-                                    <th>HERE GOES OPTIONS</th>
+                                    {options.map((option) => {
+                                        return <th>{option.title}</th>
+                                    })}
                                     <th>Price</th>
                                     <th>Weight</th>
                                     <th>SKU</th>
@@ -39,7 +41,7 @@ const Variants = ({ variants = [], addVariant }) => {
                             </thead>
                             <tbody>
                                 {variants.map((variant) => {
-                                    return <Variant id={variant.id} />
+                                    return <Variant id={variant.id} options={options} />
                                 })}
                             </tbody>
                         </Table>
@@ -52,7 +54,8 @@ const Variants = ({ variants = [], addVariant }) => {
 
 const mapStateToProps = (state) => {
     return {
-        variants: state.variants
+        variants: state.variants,
+        options: state.options,
     }
 }
 const mapDispatchToProps = (dispatch) => ({

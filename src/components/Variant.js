@@ -5,7 +5,7 @@ import FileUpload from './FileUpload';
 import { connect } from 'react-redux';
 
 
-const Variant = ({ updateVariant, removeVariant, id }) => {
+const Variant = ({ updateVariant, removeVariant, options, id }) => {
     const productCode = createRef();
     const priceRef = createRef();
     const weightRef = createRef();
@@ -43,12 +43,14 @@ const Variant = ({ updateVariant, removeVariant, id }) => {
                 </InputGroup>
             </td>
             <td><FileUpload /></td>
-            <td>
-                <Form.Control as="select" defaultValue="----">
-                    <option>-----</option>
-                    <option>...</option>
-                </Form.Control>
-            </td>
+            {options.map((option) => {
+                return <td>
+                    <Form.Control as="select" defaultValue="----">
+                        <option>{option.optionValues}</option>
+                        <option>...</option>
+                    </Form.Control>
+                </td>
+            })}
             <td>
                 <InputGroup className="mb-3">
                     <InputGroup.Prepend>
@@ -92,7 +94,8 @@ const Variant = ({ updateVariant, removeVariant, id }) => {
 
 const mapStateToProps = (state) => {
     return {
-        variants: state.variants
+        variants: state.variants,
+        options: state.options
     }
 }
 const mapDispatchToProps = (dispatch) => ({

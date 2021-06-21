@@ -10,11 +10,10 @@ const Option = ({ options, option, addOptionValue, updateOption, removeOption, i
 
     const handleKeyUp = () => {
         const valuesToSend = {
-            id,
+            id: optionId,
             title: titleRef.current.value,
-            values: [],
+            values: [valuesRefs],
         };
-
         updateOption(valuesToSend);
     }
 

@@ -32,10 +32,5 @@ const mapStateToProps = (state) => {
     variants: state.variants
   }
 }
-// const mapDispatchToProps = (dispatch) => ({
-//   // addVariant: (variantValue) => { dispatch({ type: 'ADD_VARIANT', value: variantValue }) },
-//   // updateVariant: (variantValue) => { dispatch({ type: 'UPDATE_VARIANT', value: variantValue }) },
-// });
-
 
 export default connect(mapStateToProps)(App)

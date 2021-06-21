@@ -1,5 +1,11 @@
 const initState = {
     options: [
+        {
+            id: null,
+            title: null,
+            optionValues: ['option1', 'option2']
+
+        },
     ],
     variants: [
     ],
@@ -33,16 +39,12 @@ const rootReducer = (state = initState, action) => {
     };
 
     if (action.type === 'REMOVE_VARIANT') {
-        const variantIndexToChange = state.variants.findIndex((variant) => {
-            return variant.id === action.value
-        });
-
+        const variantId = action.value;
         return {
             ...state,
             variants: [
-                ...state.variants.slice(0, variantIndexToChange),
-                ...state.variants.slice(variantIndexToChange + 1)
-            ],
+                ...state.variants.filter(variant => variant.id !== variantId)
+            ]
         }
     };
 
@@ -59,10 +61,7 @@ const rootReducer = (state = initState, action) => {
 
     if (action.type === 'UPDATE_OPTION') {
         const options = state.options.map(option => {
-            console.log('action value id ', action.value)
-            console.log('option id ', option.id)
             if (option.id === action.value.id) {
-                console.log('here ', action.value)
                 return action.value;
             };
             return option;
@@ -76,17 +75,8 @@ const rootReducer = (state = initState, action) => {
 
     if (action.type === 'REMOVE_OPTION') {
         const optionIndexToChange = state.options.findIndex((option) => {
-            console.log('option.id ', option.id)
-            console.log('action.value ', action.value)
             return option.id !== action.value
         });
-
-        // const optionIndexToChange = state.options.filter((option) => {
-        //     console.log('option.id', option.id)
-        //     console.log('action.value', action.value)
-        //     return option.id !== action.value
-        // })
-
         return {
             ...state,
             options: [
@@ -97,14 +87,15 @@ const rootReducer = (state = initState, action) => {
     };
 
     if (action.type === 'ADD_OPTION_VALUE') {
-        const newOptionValue = {
-            ...state,
-            options: [
-                ...state.options,
-                action.value
-            ]
-        };
-        return newOptionValue;
+
+        const options = state.options.filter(option => {
+
+            if (option.id === action.value) {
+
+                return action.value;
+            };
+            return option;
+        });
     };
 
     return state;
